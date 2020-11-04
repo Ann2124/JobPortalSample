@@ -56,6 +56,6 @@ namespace JobPortalSample.Models
         [Display(Name ="Employer Details")]
         public string EmployerDetails { get; set; }
         
-
+        public virtual ICollection<Application> Applications { get; set; }
     }
 }
