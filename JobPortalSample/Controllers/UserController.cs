@@ -48,16 +48,16 @@ namespace JobPortalSample.Controllers
         {
             if(ModelState.IsValid)
             {
-                using (JobPortalContext db = new JobPortalContext())
-                {
+                
+                
                     db.Users.Add(usr);
                     db.SaveChanges();
-                }
+                
                 ModelState.Clear();
                 ViewBag.Message = usr.Firstname + " " + usr.Lastname + " Successfully registered.";
             }
             
-            return View();
+            return RedirectToAction("Index","User");
         }
         public static string Encrypt(string clearText)
         {
