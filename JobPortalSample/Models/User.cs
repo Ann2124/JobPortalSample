@@ -19,7 +19,7 @@ namespace JobPortalSample.Models
         [Display(Name ="Password")]
         [DataType(DataType.Password)]
         [StringLength(255,ErrorMessage ="Minimum of 8 characters",MinimumLength =8)]
-        [RegularExpression("^((?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])|(?=.?[A-Z])(?=.?[a-z])(?=.?[^a-zA-Z0-9])|(?=.?[A-Z])(?=.?[0-9])(?=.?[^a-zA-Z0-9])|(?=.?[a-z])(?=.?[0-9])(?=.?[^a-zA-Z0-9])).{8,}$", ErrorMessage = "Passwords must be at least 8 characters and should contain : upper case (A-Z), lower case (a-z), number (0-9) and special character (e.g. !@#$%^&*)")]
+        
         public string Password { get; set; }
         [NotMapped]
         [Compare("Password")]

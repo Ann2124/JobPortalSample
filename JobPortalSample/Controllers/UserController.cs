@@ -39,6 +39,21 @@ namespace JobPortalSample.Controllers
             }
             return View(user);
         }
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(User usr)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Users.Add(usr);
+                db.SaveChanges();
+            }
+            ModelState.Clear();
+            return View();
+        }
         public static string Encrypt(string clearText)
         {
             string EncryptionKey = "MAKV2SPBNI99212";
