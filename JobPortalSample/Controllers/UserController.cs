@@ -52,10 +52,10 @@ namespace JobPortalSample.Controllers
                 
                     db.Users.Add(usr);
                     db.SaveChanges();
-                
-                ModelState.Clear();
-                ViewBag.Message = usr.Firstname + " " + usr.Lastname + " Successfully registered.";
+                    ViewBag.Message = usr.Firstname + " " + usr.Lastname + " Successfully registered.";
+                    ModelState.Clear();
             }
+
             
             return RedirectToAction("Index","User");
         }
