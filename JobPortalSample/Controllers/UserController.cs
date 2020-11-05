@@ -15,7 +15,7 @@ namespace JobPortalSample.Controllers
 {
     public class UserController : Controller
     {
-        private JobPortalContext db = new JobPortalContext();
+        public JobPortalContext db = new JobPortalContext();
         // GET: User
         public ActionResult Index()
         {
@@ -48,10 +48,15 @@ namespace JobPortalSample.Controllers
         {
             if(ModelState.IsValid)
             {
-                db.Users.Add(usr);
-                db.SaveChanges();
+                using (JobPortalContext db = new JobPortalContext())
+                {
+                    db.Users.Add(usr);
+                    db.SaveChanges();
+                }
+                ModelState.Clear();
+                ViewBag.Message = usr.Firstname + " " + usr.Lastname + " Successfully registered.";
             }
-            ModelState.Clear();
+            
             return View();
         }
         public static string Encrypt(string clearText)
