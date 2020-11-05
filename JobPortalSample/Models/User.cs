@@ -19,12 +19,11 @@ namespace JobPortalSample.Models
         [Display(Name ="Password")]
         [DataType(DataType.Password)]
         [StringLength(255,ErrorMessage ="Minimum of 8 characters",MinimumLength =8)]
-        
         public string Password { get; set; }
         [NotMapped]
         [Compare("Password")]
         [DataType(DataType.Password)]
-        [Required(ErrorMessage ="Confirm Password")]
+        
         public string ConfirmPassword { get; set; }
         [Required]
         [Display(Name ="First Name")]
