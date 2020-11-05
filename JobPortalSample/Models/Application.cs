@@ -13,10 +13,10 @@ namespace JobPortalSample.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int applicationId { get; set; }
         [Required]
-        [Display(Name = "Email Id")]
+        [Display(Name = "Email ID")]
         public string email { get; set; }
         [Required]
-        [Display(Name = "Job Id")]
+        [Display(Name = "Job ID")]
         public int jobId { get; set; }
         public string status { get; set; }
 

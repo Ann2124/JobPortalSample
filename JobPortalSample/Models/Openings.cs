@@ -28,7 +28,7 @@ namespace JobPortalSample.Models
         [Display(Name = "Qualification Required")]
         public string qualification { get; set; }
         [Required]
-        [Display(Name = "Job Location")]
+        [Display(Name = "Location")]
         public string location { get; set; }
         [Required]
         [Display(Name = "Vacancies")]
