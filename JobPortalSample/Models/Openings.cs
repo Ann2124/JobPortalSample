@@ -41,7 +41,7 @@ namespace JobPortalSample.Models
         public string company { get; set; }
 
         public virtual Employer employer { get; set; }
-        public virtual ICollection<application> applications { get; set; }
+        public virtual ICollection<Application> applications { get; set; }
     }
 }
     

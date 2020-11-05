@@ -15,5 +15,6 @@ namespace JobPortalSample.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Application> Applications { get; set; }
         public DbSet<Employer> Employers { get; set; }
+        public DbSet<Openings> Openings { get; set; }
     }
 }
