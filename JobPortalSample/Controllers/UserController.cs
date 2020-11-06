@@ -44,19 +44,23 @@ namespace JobPortalSample.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(User usr)
+        public ActionResult Register([Bind(Include = "Email,Firstname,Lastname,Password,ConfirmPassword,Address,Mobileno,Qualification,Year,Experience,Employer,EmployerDetails")] User usr)
         {
-            if(ModelState.IsValid)
+            usr.Password = Encrypt(usr.Password);
+            usr.ConfirmPassword = Encrypt(usr.ConfirmPassword);
+            var check = db.Users.Find(usr.Email);
+            if(check==null)
             {
-                using (JobPortalContext db = new JobPortalContext())
-                {
-                    db.Users.Add(usr);
-                    db.SaveChanges();
-                }
-                    ViewBag.Message = usr.Firstname + " " + usr.Lastname + " Successfully registered.";
-                    ModelState.Clear();
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.Users.Add(usr);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index","User");
+            else
+            {
+                ModelState.AddModelError("", "User Already Exists!");
+                return View();
+            }
         }
 
 
