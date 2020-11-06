@@ -8,14 +8,15 @@ using System.IO;
 using System.Data.Entity;
 using System.Web.Security;
 
+
 namespace JobPortalSample.Controllers
 {
     public class HomeController : Controller
     {
-        
+        JobPortalContext db = new JobPortalContext();
         public ActionResult Index()
         {
-            return View();
+            return View(db.Openings.ToList());
         }
 
         public ActionResult About()
