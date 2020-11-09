@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
+
+
 namespace JobPortalSample.Controllers
 {
     public class UserController : Controller
@@ -59,6 +61,40 @@ namespace JobPortalSample.Controllers
                 }
             }
             return clearText;
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "Email,Password,ConfirmPassword,Firstname,Lastname,Address,ContactNumber,Qualification,Year,Experience,YearofExperience,Employer,EmployerDetails")] User usr)
+        {
+            usr.Password = Encrypt(usr.Password);
+            usr.ConfirmPassword =Encrypt(usr.ConfirmPassword);
+            var check = db.Users.Find(usr.Email);
+            if (check == null)
+            {
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.Users.Add(usr);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            else
+            {
+                ModelState.AddModelError("", "User already Exists");
+                return View();
+            }
+        }
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index");
         }
     }
 }
