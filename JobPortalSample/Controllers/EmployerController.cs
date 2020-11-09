@@ -63,5 +63,39 @@ namespace JobPortalSample.Controllers
             }
             return clearText;
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "EmployerId,FirstName,LastName,Password,ConfirmPassword,MobileNo,Organisation")] Employer emp)
+        {
+            emp.Password = encrypt(emp.Password);
+            emp.ConfirmPassword = encrypt(emp.ConfirmPassword);
+            var check = db.Employers.Find(emp.EmployerId);
+            if (check == null)
+            {
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.Employers.Add(emp);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            else
+            {
+                ModelState.AddModelError("", "User already Exists");
+                return View();
+            }
+        }
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index");
+        }
     }
 }
