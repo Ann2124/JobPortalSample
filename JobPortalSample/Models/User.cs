@@ -49,10 +49,10 @@ namespace JobPortalSample.Models
         public string Year { get; set; }
         [Required]
         [Display(Name = "Experienced/Fresher")]
-        public string Experience;
+        public string Experience { get; set; }
         [Required]
         [Display(Name = "Experience")]
-        public int YearOfExperience;
+        public int YearOfExperience { get; set; }
         [Required]
         [Display(Name ="Last Employer")]
         public string Employer { get; set; }
