@@ -12,7 +12,7 @@ namespace JobPortalSample.Models
     {
         [Key]
         [Required]
-        [Display(Name ="Email")]
+        [Display(Name ="Email ID")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
@@ -28,10 +28,10 @@ namespace JobPortalSample.Models
         [Display(Name ="Confirm Password")]
         public string ConfirmPassword { get; set; }
         [Required]
-        [Display(Name ="Firstname")]
+        [Display(Name ="First Name")]
         public string Firstname { get; set; }
         [Required]
-        [Display(Name ="Lastname")]
+        [Display(Name ="Last Name")]
         public string Lastname { get; set; }
         [Display(Name ="Address")]
         [Required(ErrorMessage ="Enter the address")]

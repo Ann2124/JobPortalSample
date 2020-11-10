@@ -12,7 +12,7 @@ namespace JobPortalSample.Models
         [Key]
         [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name ="Email")]
+        [Display(Name ="Email ID")]
         public string EmployerId { get; set; }
         [Required]
         [Display(Name ="First Name")]
@@ -32,6 +32,7 @@ namespace JobPortalSample.Models
         [Required(ErrorMessage ="Confirm Password")]
         public string ConfirmPassword { get; set; }
         [Required]
+        [Display(Name = "Contact Number")]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Your mobile number  is not valid")]
         [RegularExpression(@"^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$", ErrorMessage = "Please enter a valid mobile number")]
         public string MobileNo { get; set; }

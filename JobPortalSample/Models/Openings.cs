@@ -32,7 +32,7 @@ namespace JobPortalSample.Models
         [Display(Name ="Vacancies")]
         public int Vacancy { get; set; }
         [Required]
-        [Display(Name ="Email")]
+        [Display(Name ="Email ID")]
         public string EmployerID { get; set; }
         [Required]
         [Display(Name ="Company")]
