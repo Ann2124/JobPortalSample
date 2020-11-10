@@ -33,7 +33,7 @@ namespace JobPortalSample.Controllers
                 Session["UserID"] = usr.Email.ToString();
                 Session["UserName"] = (usr.Firstname).ToString();
                 Session["Role"] = "user";
-                return RedirectToAction("JobList");
+                return RedirectToAction("JobsList");
             }
             else
             {
@@ -95,6 +95,74 @@ namespace JobPortalSample.Controllers
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Index");
+        }
+        public ActionResult JobsList()
+        {
+            return View(db.Openings.ToList());
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult Apply(string JobID)
+        {
+            if (Session["UserID"]!=null)
+            {
+                ViewBag.UserID = Session["UserID"].ToString();
+                ViewBag.JobID = JobID;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Register");
+            }
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Apply([Bind(Include ="Email,JobID")]Application app,HttpPostedFileBase CV)
+        {
+            string PathCV = "";
+            string FileExtension = "";
+            try
+            {
+                if (CV != null)
+                {
+                    if(CV.ContentLength>0)
+                    {
+                        string FileName = Path.GetFileName(CV.FileName);
+                        FileName.Substring(FileName.LastIndexOf('.') + 1).ToLower();
+                        if(FileExtension=="pdf")
+                        {
+                            FileName = app.Email.Substring(0, app.Email.Length - 4);
+                            FileName = FileName = ".pdf";
+                            PathCV = Path.Combine(Server.MapPath("~/CVs"), FileName);
+                            CV.SaveAs(PathCV);
+                            ViewBag.Message = "File Succesfully Uploaded!";
+                        }
+                        else
+                            ViewBag.Status = "Please Select a PDF file!";
+                    }
+                }
+                else
+                    ViewBag.Status = "Please Upload a File";
+            }
+            catch
+            {
+                ModelState.AddModelError("","Please Note:Failure to Upload File");
+            }
+            if (CV != null && FileExtension == "pdf")
+            {
+                var applicatn = new Application()
+                {
+                    Email = app.Email,
+                    JobId = app.JobId,
+                    Status = "Pending"
+                };
+                db.Applications.Add(applicatn);
+                db.SaveChanges();
+
+                return RedirectToAction("JobsList");
+            }
+            else
+                return View();
         }
     }
 }
