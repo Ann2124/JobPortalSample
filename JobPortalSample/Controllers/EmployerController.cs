@@ -97,5 +97,51 @@ namespace JobPortalSample.Controllers
             Session.Abandon();
             return RedirectToAction("Index");
         }
+
+        public ActionResult AddJob()
+        {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult AddJob([Bind(Include = "JobId,Designation,Salary,Experience,Qualification,Location,Vacancy")] Openings open)
+        {
+
+            string empid = Session["UserId"].ToString();
+            var org = db.Employers.Where(o => o.EmployerId.Equals(empid)).FirstOrDefault();
+            var check = db.Openings.Find(open.JobId);
+            if (check == null)
+            {
+                open.EmployerID = empid;
+                open.Company = org.Organisation;
+                db.Openings.Add(open);
+                db.SaveChanges();
+                return RedirectToAction("AddJob");
+            }
+            return RedirectToAction("AddJob");
+
+
+        }
+        [Authorize]
+        public ActionResult AppliedJob()
+        {
+            string empId = Session["UserId"].ToString();
+            var data = db.Openings.Where(d => d.EmployerID.Equals(empId)).ToList();
+            return View(data);
+        }
+        [Authorize]
+        public ActionResult Viewapplied(int? jobId)
+        {
+            var app = db.Applications.Where(j => j.JobId == jobId && j.Status.Equals("pending")).ToList();
+            return View(app);
+        }
     }
 }
