@@ -4,7 +4,7 @@
     ViewBag.Title = "Register";
 }
 
-<h2>Register</h2>
+<h2 class="text-center text-black-50">New Employer Registery</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Employer</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -79,7 +78,7 @@
 }
 
 <div>
-    @Html.ActionLink("Login", "Index")
+    @Html.ActionLink("Already Registered?", "Index")
 </div>
 
 @section Scripts {
