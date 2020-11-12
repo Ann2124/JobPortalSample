@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body style="background-image:url('/Images/5uE7Ie.jpg');background-size:cover">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,11 +22,14 @@
 
 
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item"><span><i class="fa fa-user" style="font-size:48px;"></i></span>
-                        @Html.ActionLink("Job Here", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li class="nav-item">  
+                            <img src="~/Images/jplogo1.jpg" height="48px" />
+                        </li>
                         <li class="nav-item"><a href="/home/index" class="nav-link" style="color:white">Home<span><i class="fa fa-home" style="color:white"></i></span></a> </li>
                         <li class="nav-item"><a href="/home/about" class="nav-link" style="color:white">About<span><i class="fa fa-info-circle" style="color:white"></i></span></a></li>
                         <li class="nav-item"><a href="/home/contact" class="nav-link" style="color:white">Contact<span><i class="fa fa-phone" style="color:white"></i></span></a> </li>
+                        <li class="nav-item"><a href="/employer/index" class="nav-link" style="color:white">Employer Login<span><i class="fa fa-user-circle" style="color:white"></i></span></a> </li>
+                        <li class="nav-item"><a href="/user/index" class="nav-link" style="color:white">User Login<span><i class="fa fa-sign-in" style="color:white"></i></span></a> </li>
                     </ul>
 
 
